@@ -5,7 +5,7 @@ pragma solidity 0.8.7;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../interfaces/IRewarder.sol";
-import "../token/BeethovenxMasterChef.sol";
+import "../token/OfficialMasterChef.sol";
 
 contract TimeBasedRewarder is IRewarder, Ownable {
     using SafeERC20 for IERC20;
@@ -180,7 +180,7 @@ contract TimeBasedRewarder is IRewarder, Ownable {
             UserInfo storage user = userInfo[_pid][_user];
             uint256 accRewardTokenPerShare = pool.accRewardTokenPerShare;
 
-            uint256 totalLpSupply = BeethovenxMasterChef(MASTERCHEF)
+            uint256 totalLpSupply = OfficialMasterChef(MASTERCHEF)
                 .lpTokens(_pid)
                 .balanceOf(MASTERCHEF);
 
@@ -220,7 +220,7 @@ contract TimeBasedRewarder is IRewarder, Ownable {
     function updatePool(uint256 pid) public returns (PoolInfo memory pool) {
         pool = poolInfo[pid];
         if (pool.lastRewardTime != 0 && block.timestamp > pool.lastRewardTime) {
-            uint256 totalLpSupply = BeethovenxMasterChef(MASTERCHEF)
+            uint256 totalLpSupply = OfficialMasterChef(MASTERCHEF)
                 .lpTokens(pid)
                 .balanceOf(MASTERCHEF);
 

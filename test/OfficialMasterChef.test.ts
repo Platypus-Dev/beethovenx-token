@@ -10,12 +10,12 @@ import {
   setAutomineBlocks,
 } from "./utilities"
 import { ethers } from "hardhat"
-import { BeethovenxMasterChef, BeethovenxToken, RewarderMock } from "../types"
+import {OfficialMasterChef,OfficialToken, RewarderMock } from "../types"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { BigNumber } from "ethers"
 
-describe("BeethovenxMasterChef", function () {
-  let beets: BeethovenxToken
+describe("OfficialMasterChef", function () {
+  let beets:OfficialToken
   let owner: SignerWithAddress
   let dev: SignerWithAddress
   let treasury: SignerWithAddress
@@ -41,7 +41,7 @@ describe("BeethovenxMasterChef", function () {
   })
 
   beforeEach(async function () {
-    beets = await deployContract("BeethovenxToken", [])
+    beets = await deployContract("OfficialToken", [])
   })
 
   it("sets initial state correctly", async () => {

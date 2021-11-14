@@ -1,7 +1,7 @@
 import { BigNumber } from "ethers"
 import { ethers, network } from "hardhat"
 import { scriptConfig } from "../cli-config"
-import { BeethovenxMasterChef, ERC20, IERC20, MasterChefLpTokenTimelock } from "../../types"
+import { OfficialMasterChef, ERC20, IERC20, MasterChefLpTokenTimelock } from "../../types"
 import inquirer from "inquirer"
 import { stdout } from "../utils/stdout"
 
@@ -9,7 +9,7 @@ const config = scriptConfig[network.config.chainId!]
 
 export async function printPercentageAmount(percentage: number) {
   const [dev, admni, lbpFunds] = await ethers.getSigners()
-  const lp = (await ethers.getContractAt("ERC20", config.contractAddresses.BeetsLp)) as ERC20
+  const lp = (await ethers.getContractAt("ERC20", config.contractAddresses.CialLp)) as ERC20
   const totalAmount = await lp.balanceOf(lbpFunds.address)
   const amount = percentageOf(totalAmount, percentage)
   stdout.printInfo(`total: ${totalAmount} \n ${percentage / 10}%: ${amount}`)
@@ -22,7 +22,7 @@ export async function vestLps(vestingContract: string, amount: BigNumber, benefi
   if (actualBeneficiary !== beneficiary) {
     throw new Error(`Beneficiary does not match! expected: ${actualBeneficiary}, provided: ${beneficiary}`)
   }
-  const lp = (await ethers.getContractAt("ERC20", config.contractAddresses.BeetsLp)) as IERC20
+  const lp = (await ethers.getContractAt("ERC20", config.contractAddresses.CialLp)) as IERC20
 
   const answers = await inquirer.prompt([
     {
@@ -43,7 +43,7 @@ export async function vestLps(vestingContract: string, amount: BigNumber, benefi
 }
 
 export async function listVestedAmount(vestingContract: string) {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const userInfo = await chef.userInfo(0, vestingContract)
   stdout.printInfo(`Deposited amount for ${vestingContract}: ${userInfo.amount}`)
 }

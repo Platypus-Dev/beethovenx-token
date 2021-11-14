@@ -1,17 +1,17 @@
 import { deployContract, bn } from "./utilities"
-import { BeethovenxToken } from "../types"
+import { OfficialToken } from "../types"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { ethers } from "hardhat"
 import { expect } from "chai"
 
 describe("BeethovenX token tests", () => {
-  let beets: BeethovenxToken
+  let beets: OfficialToken
   let owner: SignerWithAddress
   let dev: SignerWithAddress
   let treasury: SignerWithAddress
 
   beforeEach(async function () {
-    beets = await deployContract("BeethovenxToken", [])
+    beets = await deployContract("OfficialToken", [])
     const signers = await ethers.getSigners()
     owner = signers[0]
     dev = signers[1]

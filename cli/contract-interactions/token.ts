@@ -1,12 +1,12 @@
 import { scriptConfig } from "../cli-config"
 import { ethers, network } from "hardhat"
-import { BeethovenxMasterChef, BeethovenxToken } from "../../types"
+import { OfficialMasterChef, OfficialToken } from "../../types"
 import { stdout } from "../utils/stdout"
 
 const config = scriptConfig[network.config.chainId!]
 
 export async function printCirculatingSupply() {
-  const token = (await ethers.getContractAt("BeethovenxToken", config.contractAddresses.BeethovenxToken)) as BeethovenxToken
+  const token = (await ethers.getContractAt("OfficialToken", config.contractAddresses.OfficialToken)) as OfficialToken
   const totalSupply = await token.totalSupply()
   const teamVesting = await token.balanceOf(config.contractAddresses.TeamVesting)
   const treasury = await token.balanceOf(config.walletAddresses.treasury)

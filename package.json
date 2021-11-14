@@ -15,12 +15,12 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/beethovenxfi/beethovenx-token"
+    "url": "git+https://github.com/l0rdicon/token"
   },
   "bugs": {
-    "url": "https://github.com/beethovenxfi/beethovenx-token/issues"
+    "url": "https://github.com/l0rdicon/token/issues"
   },
-  "homepage": "https://github.com/beethovenxfi/beethovenx-token#readme",
+  "homepage": "https://github.com/l0rdicon/token#readme",
   "keywords": [
     "beethovenx",
     "ethereum"
@@ -28,6 +28,7 @@
   "scripts": {
     "build": "hardhat compile",
     "console": "hardhat console",
+    "hardhat": "hardhat run",
     "testnet:deploy": "yarn ropsten:deploy && yarn rinkeby:deploy && yarn goerli:deploy && yarn kovan:deploy && yarn moonbase:deploy && yarn arbitrum:deploy",
     "mainnet:deploy": "hardhat --network mainnet deploy",
     "mainnet:verify": "hardhat --network mainnet etherscan-verify --solc-input",
@@ -39,6 +40,8 @@
     "rinkeby:verify": "hardhat --network rinkeby etherscan-verify --solc-input",
     "rinkeby:export": "hardhat --network rinkeby export --export exports/rinkeby.json",
     "goerli:deploy": "hardhat --network goerli deploy",
+    "fuji:deploy": "hardhat --network fuji deploy",
+    "fuji:verify": "hardhat --network fuji etherscan-verify --solc-input",
     "goerli:verify": "hardhat --network goerli etherscan-verify --solc-input",
     "goerli:export": "hardhat --network goerli export --export exports/goerli.json",
     "kovan:deploy": "hardhat --network kovan deploy",

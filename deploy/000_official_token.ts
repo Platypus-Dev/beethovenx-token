@@ -1,20 +1,18 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types"
-import { BeethovenxToken } from "../types"
+import { OfficialToken } from "../types"
 import { bn } from "../test/utilities"
 
 export default async function ({ ethers, getNamedAccounts, deployments }: HardhatRuntimeEnvironment) {
   const { deploy } = deployments
 
-  const { deployer } = await getNamedAccounts()
-
-  const { address } = await deploy("BeethovenxToken", {
-    from: deployer,
+  const { address } = await deploy("OfficialToken", {
+    from: "0xb3d1dd192868171199786b144ed4970c678adfc938bad625d02b600aae2c5959",
     log: true,
     deterministicDeployment: false,
-    contract: "contracts/BeethovenxToken.sol:BeethovenxToken",
+    contract: "contracts/token/OfficialToken.sol:OfficialToken",
   })
 
-  const beets = (await ethers.getContractAt("contracts/BeethovenxToken.sol:BeethovenxToken", address)) as BeethovenxToken
+  const beets = (await ethers.getContractAt("contracts/token/OfficialToken.sol:OfficialToken", address)) as OfficialToken
 
   const partnershipFundAddress = process.env.PARTNERSHIP_FUND_ADDRESS!
   // 7% of total supply
@@ -48,8 +46,8 @@ export default async function ({ ethers, getNamedAccounts, deployments }: Hardha
     console.log(`minting unvested team funds '${unvestedTeamFund}' to team contract address '${teamFundAddress}'`)
     await beets.mint(teamFundAddress, unvestedTeamFund)
   }
-  if ((await beets.balanceOf(lbpFundAddress)).eq(0)) {
+ if ((await beets.balanceOf(lbpFundAddress)).eq(0)) {
     console.log(`minting lbp funds '${lbpFunds}' to lbp address '${lbpFundAddress}'`)
     await beets.mint(lbpFundAddress, lbpFunds)
-  }
+ }
 }

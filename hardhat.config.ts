@@ -18,6 +18,8 @@ import { removeConsoleLog } from "hardhat-preprocessor"
 
 const accounts = [`0x${process.env.DEPLOYER!}`, `0x${process.env.ADMIN!}`]
 
+console.log("got accounts", accounts)
+
 const config: HardhatUserConfig = {
   abiExporter: {
     path: "./abi",
@@ -31,7 +33,7 @@ const config: HardhatUserConfig = {
   gasReporter: {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     currency: "USD",
-    enabled: process.env.REPORT_GAS === "true",
+    enabled: process.env.REPORT_GAS === "false",
     excludeContracts: ["contracts/mocks/", "contracts/libraries/"],
   },
   mocha: {
@@ -57,6 +59,16 @@ const config: HardhatUserConfig = {
       live: true,
       saveDeployments: true,
       gasMultiplier: 30,
+    },
+    fuji: {
+      chainId: 43113,
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      accounts, // Using private key instead of mnemonic for vanity deploy
+      saveDeployments: true,
+      live: true,
+      gasMultiplier: 2,
+      gas: 2221000,
+      gasPrice: 225000000000,
     },
     // "fantom-testnet": {
     //   url: "https://rpc.testnet.fantom.network",

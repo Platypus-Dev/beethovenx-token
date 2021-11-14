@@ -1,14 +1,14 @@
 import { ethers, network } from "hardhat"
 import { scriptConfig } from "../cli-config"
 import { manageTimelockTransaction } from "./time-lock-transactions"
-import { BeethovenxMasterChef } from "../../types"
+import { OfficialMasterChef } from "../../types"
 import { BigNumber } from "ethers"
 import { stdout } from "../utils/stdout"
 
 const config = scriptConfig[network.config.chainId!]
 
 export async function addMasterChefPool(allocationPoints: number, lpTokenAddress: string, rewarderAddress: string) {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const tx = await chef.add(allocationPoints, lpTokenAddress, rewarderAddress)
   const receipt = await tx.wait()
   return receipt.transactionHash
@@ -20,7 +20,7 @@ export async function timelocked_addMasterChefPool(allocationPoints: number, lpA
     admin,
     {
       targetContract: {
-        name: "BeethovenxMasterChef",
+        name: "OfficialMasterChef",
         address: config.contractAddresses.MasterChef,
       },
       value: 0,
@@ -35,7 +35,7 @@ export async function timelocked_addMasterChefPool(allocationPoints: number, lpA
 }
 
 export async function setMasterChefPool(pid: number, allocationPoints: number, rewarderAddress: string, overwriteRewarder: boolean) {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const tx = await chef.set(pid, allocationPoints, rewarderAddress, overwriteRewarder)
   const receipt = await tx.wait()
   return receipt.transactionHash
@@ -53,7 +53,7 @@ export async function timelocked_setMasterChefPool(
     admin,
     {
       targetContract: {
-        name: "BeethovenxMasterChef",
+        name: "OfficialMasterChef",
         address: config.contractAddresses.MasterChef,
       },
       value: 0,
@@ -68,7 +68,7 @@ export async function timelocked_setMasterChefPool(
 }
 
 export async function updateEmissionRate(beetsPerBlock: BigNumber) {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const tx = await chef.updateEmissionRate(beetsPerBlock)
   const receipt = await tx.wait()
   return receipt.transactionHash
@@ -80,7 +80,7 @@ export async function timelocked_updateEmissionRate(beetsPerBlock: BigNumber, et
     admin,
     {
       targetContract: {
-        name: "BeethovenxMasterChef",
+        name: "OfficialMasterChef",
         address: config.contractAddresses.MasterChef,
       },
       value: 0,
@@ -95,7 +95,7 @@ export async function timelocked_updateEmissionRate(beetsPerBlock: BigNumber, et
 }
 
 export async function setTreasuryAddress(address: string) {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const tx = await chef.treasury(address)
   const receipt = await tx.wait()
   return receipt.transactionHash
@@ -107,7 +107,7 @@ export async function timelocked_setTreasuryAddress(address: string, eta: number
     admin,
     {
       targetContract: {
-        name: "BeethovenxMasterChef",
+        name: "OfficialMasterChef",
         address: config.contractAddresses.MasterChef,
       },
       value: 0,
@@ -122,7 +122,7 @@ export async function timelocked_setTreasuryAddress(address: string, eta: number
 }
 
 export async function listPools() {
-  const chef = (await ethers.getContractAt("BeethovenxMasterChef", config.contractAddresses.MasterChef)) as BeethovenxMasterChef
+  const chef = (await ethers.getContractAt("OfficialMasterChef", config.contractAddresses.MasterChef)) as OfficialMasterChef
   const poolsLength = await chef.poolLength()
   for (let pid = 0; pid < poolsLength.toNumber(); pid++) {
     const { allocPoint, accBeetsPerShare, lastRewardBlock } = await chef.poolInfo(pid)

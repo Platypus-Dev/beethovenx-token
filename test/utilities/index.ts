@@ -1,5 +1,5 @@
 import { ethers } from "hardhat"
-import { BeethovenxMasterChef, ERC20Mock } from "../../types"
+import {OfficialMasterChef, ERC20Mock } from "../../types"
 const { BigNumber } = require("ethers")
 
 export const BASE_TEN = 10
@@ -65,8 +65,8 @@ export async function deployChef(
   treasuryAddress: string,
   beetsPerBlock = bn(100),
   startBlock: number = 0
-): Promise<BeethovenxMasterChef> {
-  return deployContract("BeethovenxMasterChef", [beetsAddress, treasuryAddress, beetsPerBlock, startBlock])
+): Promise<OfficialMasterChef> {
+  return deployContract("OfficialMasterChef", [beetsAddress, treasuryAddress, beetsPerBlock, startBlock])
 }
 
 export async function deployERC20Mock(name: string, symbol: string, supply: number): Promise<ERC20Mock> {

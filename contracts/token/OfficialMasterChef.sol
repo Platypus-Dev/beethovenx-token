@@ -4,7 +4,7 @@ pragma solidity 0.8.7;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
-import "./BeethovenxToken.sol";
+import "./OfficialToken.sol";
 import "../interfaces/IRewarder.sol";
 
 /*
@@ -20,7 +20,7 @@ import "../interfaces/IRewarder.sol";
 */
 
 // Have fun reading it. Hopefully it's still bug-free
-contract BeethovenxMasterChef is Ownable {
+contract OfficialMasterChef is Ownable {
     using SafeERC20 for IERC20;
     using EnumerableSet for EnumerableSet.AddressSet;
 
@@ -48,7 +48,7 @@ contract BeethovenxMasterChef is Ownable {
         uint256 accBeetsPerShare; // Accumulated BEETS per LP share. this is multiplied by ACC_BEETS_PRECISION for more exact results (rounding errors)
     }
     // The BEETS TOKEN!
-    BeethovenxToken public beets;
+    OfficialToken public beets;
 
     // Treasury address.
     address public treasuryAddress;
@@ -126,7 +126,7 @@ contract BeethovenxMasterChef is Ownable {
     event UpdateEmissionRate(address indexed user, uint256 _beetsPerSec);
 
     constructor(
-        BeethovenxToken _beets,
+        OfficialToken _beets,
         address _treasuryAddress,
         uint256 _beetsPerBlock,
         uint256 _startBlock

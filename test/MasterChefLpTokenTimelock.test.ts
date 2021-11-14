@@ -1,5 +1,5 @@
 import moment from "moment"
-import { BeethovenxMasterChef, BeethovenxToken, MasterChefLpTokenTimelock } from "../types"
+import { OfficialMasterChef, OfficialToken, MasterChefLpTokenTimelock } from "../types"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { ethers } from "hardhat"
 import {
@@ -16,9 +16,9 @@ import {
 import { expect } from "chai"
 import { BigNumber } from "ethers"
 
-describe("BeethovenxMasterChef", function () {
-  let beets: BeethovenxToken
-  let chef: BeethovenxMasterChef
+describe("OfficialMasterChef", function () {
+  let beets: OfficialToken
+  let chef: OfficialMasterChef
   let owner: SignerWithAddress
   let dev: SignerWithAddress
   let treasury: SignerWithAddress
@@ -44,7 +44,7 @@ describe("BeethovenxMasterChef", function () {
   })
 
   beforeEach(async function () {
-    beets = await deployContract("BeethovenxToken", [])
+    beets = await deployContract("OfficialToken", [])
     chef = await deployChef(beets.address, treasury.address, beetsPerBlock, 0)
     await beets.transferOwnership(chef.address)
   })

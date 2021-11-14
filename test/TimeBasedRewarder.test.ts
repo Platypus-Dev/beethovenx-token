@@ -1,12 +1,12 @@
-import { BeethovenxMasterChef, BeethovenxToken, TimeBasedRewarder } from "../types"
+import { OfficialMasterChef, OfficialToken, TimeBasedRewarder } from "../types"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { ethers } from "hardhat"
 import { advanceBlock, advanceToTime, bn, deployChef, deployContract, deployERC20Mock, latest, setAutomineBlocks } from "./utilities"
 import { expect } from "chai"
 
 describe("TimeBasedRewarder", function () {
-  let beets: BeethovenxToken
-  let chef: BeethovenxMasterChef
+  let beets: OfficialToken
+  let chef: OfficialMasterChef
   let owner: SignerWithAddress
   let dev: SignerWithAddress
   let treasury: SignerWithAddress
@@ -27,7 +27,7 @@ describe("TimeBasedRewarder", function () {
   })
 
   beforeEach(async function () {
-    beets = await deployContract("BeethovenxToken", [])
+    beets = await deployContract("OfficialToken", [])
     const startBlock = 0
     const beetsPerBlock = bn(6)
 
